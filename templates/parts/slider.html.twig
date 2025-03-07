@@ -1,14 +1,14 @@
 <div class="slider">
     <div class="list">
-        {% for route in routes %}
+        {% for walk in walks %}
             <div class="item">
                 <img src="./image/img1.jpg" alt="">
 
                 <div class="content">
-                    <div class="title">{{ route.title }}</div>
-                    <div class="type">{{ route.date }}</div>
+                    <div class="title">{{ walk.title }}</div>
+                    <div class="type">{{ walk.walkDate|date("d-m-Y") }}</div>
                     <div class="description">
-                        {{ route.description }}
+                        {{ walk.description }}
                     </div>
                     <div class="button">
                         <button>SEE MORE</button>
@@ -20,7 +20,7 @@
 
 
     <div class="thumbnail">
-        {% for route in routes %}
+        {% for walk in walks %}
             <div class="item">
                 <img src="./image/img1.jpg" alt="">
             </div>

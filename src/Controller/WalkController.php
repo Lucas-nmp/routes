@@ -33,6 +33,31 @@ final class WalkController extends AbstractController
             $entityManager->persist($walk);
             $entityManager->flush();
 
+            // Subir imágenes
+            $images = $request->files->get('images');
+            $uploadDir = $this->getParameter('kernel.project_dir') . '/public/images/uploads/' . $walk->getTitle() . '_' . $walk->getWalkDate()->format('d-m-y');
+
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true); 
+            }
+            
+            if ($images) {
+                foreach ($images as $image) {
+                    if ($image->isValid() && in_array($image->getMimeType(), ['image/jpeg', 'image/png', 'image/gif'])) {
+                        try {
+                            $newFilename = uniqid() . '.' . $image->guessExtension();
+                            $image->move($uploadDir, $newFilename);
+                        } catch (FileException $e) {
+                            $this->addFlash('error', 'No se pudo subir la imagen: ' . $e->getMessage());
+                        }
+                    } else {
+                        $this->addFlash('error', 'Archivo no válido: ' . $image->getClientOriginalName());
+                    }
+                }
+            } else {
+                $this->addFlash('error', 'No se seleccionaron imágenes.');
+            }
+
             return $this->redirectToRoute('app_walk_index', [], Response::HTTP_SEE_OTHER);
         }
 
