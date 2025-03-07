@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\RouteRepository;
+use App\Repository\WalkRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: RouteRepository::class)]
-class Route
+#[ORM\Entity(repositoryClass: WalkRepository::class)]
+class Walk
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -18,7 +18,7 @@ class Route
     private ?string $title = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $routeDate = null;
+    private ?\DateTimeInterface $walkDate = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
@@ -40,14 +40,14 @@ class Route
         return $this;
     }
 
-    public function getRouteDate(): ?\DateTimeInterface
+    public function getWalkDate(): ?\DateTimeInterface
     {
-        return $this->routeDate;
+        return $this->walkDate;
     }
 
-    public function setRouteDate(\DateTimeInterface $routeDate): static
+    public function setWalkDate(\DateTimeInterface $walkDate): static
     {
-        $this->routeDate = $routeDate;
+        $this->walkDate = $walkDate;
 
         return $this;
     }

@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Walk index{% endblock %}
+
+{% block body %}
+    <h1>Walk index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>WalkDate</th>
+                <th>Description</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for walk in walks %}
+            <tr>
+                <td>{{ walk.id }}</td>
+                <td>{{ walk.title }}</td>
+                <td>{{ walk.walkDate ? walk.walkDate|date('Y-m-d') : '' }}</td>
+                <td>{{ walk.description }}</td>
+                <td>
+                    <a href="{{ path('app_walk_show', {'id': walk.id}) }}">show</a>
+                    <a href="{{ path('app_walk_edit', {'id': walk.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_walk_new') }}">Create new</a>
+{% endblock %}
