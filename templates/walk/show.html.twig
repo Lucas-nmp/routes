@@ -26,9 +26,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('app_walk_index') }}">back to list</a>
+    <a class="btn btn-secondary" href="{{ path('app_walk_index') }}">back to list</a>
 
-    <a href="{{ path('app_walk_edit', {'id': walk.id}) }}">edit</a>
+    <a class="btn btn-success" href="{{ path('app_walk_edit', {'id': walk.id}) }}">edit</a>
 
-    {{ include('walk/_delete_form.html.twig') }}
+    
 {% endblock %}
