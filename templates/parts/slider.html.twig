@@ -2,7 +2,8 @@
     <div class="list">
         {% for walk in walks %}
             <div class="item">
-                <img src="./image/img1.jpg" alt="">
+                {% set firstImage = walk.images|first %}
+                <img src="{{ firstImage is not empty ? asset('images/uploads/' ~ walk.title ~ '_' ~ walk.walkDate|date('d-m-y') ~ '/' ~ firstImage) : asset('image/img1.jpg') }}" alt="">
 
                 <div class="content">
                     <div class="title">{{ walk.title }}</div>
@@ -24,7 +25,9 @@
     <div class="thumbnail">
         {% for walk in walks %}
             <div class="item">
-                <img src="./image/img1.jpg" alt="">
+                {% set firstImage = walk.images|first %}
+                <img src="{{ firstImage is not empty ? asset('images/uploads/' ~ walk.title ~ '_' ~ walk.walkDate|date('d-m-y') ~ '/' ~ firstImage) : asset('image/img1.jpg') }}" alt="">
+
             </div>
         {% endfor %}
     </div>

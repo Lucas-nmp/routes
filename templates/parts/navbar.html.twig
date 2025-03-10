@@ -5,5 +5,14 @@
         {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('app_walk_index') }}">{{'Routes'|trans}}</a>
         {% endif %}
+        {# Selector de idioma 
+        
+        <a href="{{ path('change_locale', {'locale': 'es'}) }}" class="{{ app.request.locale == 'es' ? 'active' : '' }}">
+                🇪🇸 {{ 'Spanish'|trans }}
+        </a>
+        <a href="{{ path('change_locale', {'locale': 'en'}) }}" class="{{ app.request.locale == 'en' ? 'active' : '' }}">
+                🇬🇧 {{ 'English'|trans }}
+        </a> #}
+        
     </nav>
 </header>

@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 #[Route('/walk')]
 #[IsGranted('ROLE_ADMIN')]
@@ -74,7 +75,7 @@ final class WalkController extends AbstractController
                 $this->addFlash('error', 'No se seleccionaron imágenes.');
             }
 
-            return $this->redirectToRoute('app_walk_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_walk_index', ['redirected' => 'true'], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('walk/new.html.twig', [
@@ -98,9 +99,32 @@ final class WalkController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            
+            $images = $request->files->get('images');
+            $uploadDir = $this->getParameter('kernel.project_dir') . '/public/images/uploads/' . $walk->getTitle() . '_' . $walk->getWalkDate()->format('d-m-y');
+
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true); 
+            }
+
+            if ($images) {
+                foreach ($images as $image) {
+                    if ($image->isValid() && in_array($image->getMimeType(), ['image/jpeg', 'image/png', 'image/gif'])) {
+                        try {
+                            $newFilename = uniqid() . '.' . $image->guessExtension();
+                            $image->move($uploadDir, $newFilename);
+                        } catch (FileException $e) {
+                            $this->addFlash('error', 'No se pudo subir la imagen: ' . $e->getMessage());
+                        }
+                    } else {
+                        $this->addFlash('error', 'Archivo no válido: ' . $image->getClientOriginalName());
+                    }
+                }
+            }
+
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_walk_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_walk_index', ['redirected' => 'true'], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('walk/edit.html.twig', [
@@ -113,10 +137,26 @@ final class WalkController extends AbstractController
     public function delete(Request $request, Walk $walk, EntityManagerInterface $entityManager): Response
     {
         if ($this->isCsrfTokenValid('delete'.$walk->getId(), $request->getPayload()->getString('_token'))) {
+
+            
+            $uploadDir = $this->getParameter('kernel.project_dir') . '/public/images/uploads/' . $walk->getTitle() . '_' . $walk->getWalkDate()->format('d-m-y');
+
+            if (is_dir($uploadDir)) {
+                
+                $files = glob($uploadDir . '/*');
+                foreach ($files as $file) {
+                    if (is_file($file)) {
+                        unlink($file);
+                    }
+                }
+
+                rmdir($uploadDir);
+            }
+
             $entityManager->remove($walk);
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_walk_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_walk_index', ['redirected' => 'true'], Response::HTTP_SEE_OTHER);
     }
 }

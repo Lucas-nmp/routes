@@ -17,7 +17,6 @@
     {{ parent() }} 
 
     
-
     <script>
         'use strict';
 
@@ -74,6 +73,22 @@
 
         
         document.addEventListener('turbo:load', initializeGridJS);
+
+        
+        document.addEventListener('turbo:load', function () {
+            
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('redirected')) {
+                
+                urlParams.delete('redirected');
+                const newUrl = window.location.pathname + (urlParams.toString() ? `?${urlParams.toString()}` : '');
+                window.history.replaceState({}, document.title, newUrl);
+
+                
+                window.location.reload();
+            }
+        });
     </script>
+
 {% endblock %}
 
