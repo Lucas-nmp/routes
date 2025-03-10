@@ -1,27 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Walk{% endblock %}
+{% block title %}{{ 'Walk'|trans }}{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h2>Walk</h2>
+        <h2>{{ 'Walk'|trans }}</h2>
 
         <table class="table">
             <tbody>
                 <tr>
-                    <th>Id</th>
+                    <th>{{ 'Id'|trans }}</th>
                     <td>{{ walk.id }}</td>
                 </tr>
                 <tr>
-                    <th>Title</th>
+                    <th>{{ 'Title'|trans }}</th>
                     <td>{{ walk.title }}</td>
                 </tr>
                 <tr>
-                    <th>WalkDate</th>
+                    <th>{{ 'WalkDate'|trans }}</th>
                     <td>{{ walk.walkDate ? walk.walkDate|date('Y-m-d') : '' }}</td>
                 </tr>
                 <tr>
-                    <th>Description</th>
+                    <th>{{ 'Description'|trans }}</th>
                     <td>{{ walk.description }}</td>
                 </tr>
             </tbody>

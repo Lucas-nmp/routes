@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Route list{% endblock %}
+{% block title %}{{ 'Route list'|trans }}{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h2>Route list</h2>
+        <h2>{{ 'Route list'|trans }}</h2>
         <a class="btn btn-success" title="{{ 'Add Route'|trans }}" href="{{ path('app_walk_new') }}"><i class="bi bi-folder-plus"></i></a>
         <hr>
         

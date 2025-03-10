@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Walk{% endblock %}
+{% block title %}{{ 'Edit Route'|trans }}{% endblock %}
 
 {% block body %}
-    <h2>Edit Walk</h2>
+    <h2>{{ 'Edit Route'|trans }}</h2>
 
     {{ include('walk/_form.html.twig', {'button_label': 'Update'}) }}
 
