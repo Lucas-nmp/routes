@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file source-language="en" target-language="es" datatype="plaintext" original="file.ext">
+    <header>
+      <tool tool-id="symfony" tool-name="Symfony"/>
+    </header>
+    <body>
+      <trans-unit id="LFtmm83" resname="Routes">
+        <source>Routes</source>
+        <target>Rutas</target>
+      </trans-unit>
+      <trans-unit id="OnhpU4i" resname="Home">
+        <source>Home</source>
+        <target>Inicio</target>
+      </trans-unit>
+      <trans-unit id="nWMiwfT" resname="Login">
+        <source>Login</source>
+        <target>Identificarse</target>
+      </trans-unit>
+      <trans-unit id="wYmEDPf" resname="Log in">
+        <source>Log in</source>
+        <target>Identificarse</target>
+      </trans-unit>
+      <trans-unit id="acVpEs4" resname="You are logged in as">
+        <source>You are logged in as</source>
+        <target>Estás identificado como</target>
+      </trans-unit>
+      <trans-unit id="0FJ_Sz1" resname="Logout">
+        <source>Logout</source>
+        <target>Salir</target>
+      </trans-unit>
+      <trans-unit id="dDUw20Q" resname="Please sign in">
+        <source>Please sign in</source>
+        <target>Identifiquese porfavor</target>
+      </trans-unit>
+      <trans-unit id="47ienTP" resname="Username">
+        <source>Username</source>
+        <target>Nombre de usuario</target>
+      </trans-unit>
+      <trans-unit id="588_9PF" resname="Password">
+        <source>Password</source>
+        <target>Contraseña</target>
+      </trans-unit>
+      <trans-unit id="v9QCsvb" resname="Sign in">
+        <source>Sign in</source>
+        <target>Entrar</target>
+      </trans-unit>
+      <trans-unit id="Rz0HvGt" resname="Edit Route">
+        <source>Edit Route</source>
+        <target>Editar Ruta</target>
+      </trans-unit>
+      <trans-unit id="oHqlgY3" resname="Route list">
+        <source>Route list</source>
+        <target>Lista de Rutas</target>
+      </trans-unit>
+      <trans-unit id="azPHxXE" resname="Add Route">
+        <source>Add Route</source>
+        <target>Añadir Ruta</target>
+      </trans-unit>
+      <trans-unit id="3NHVIj9" resname="Name">
+        <source>Name</source>
+        <target>Nombre</target>
+      </trans-unit>
+      <trans-unit id="mcQKtAW" resname="Date">
+        <source>Date</source>
+        <target>Fecha</target>
+      </trans-unit>
+      <trans-unit id="Um4Ah8w" resname="Description">
+        <source>Description</source>
+        <target>Descripción</target>
+      </trans-unit>
+      <trans-unit id=".4BZ3Gd" resname="Actions">
+        <source>Actions</source>
+        <target>Acciones</target>
+      </trans-unit>
+      <trans-unit id="3Mg5pAF" resname="View">
+        <source>View</source>
+        <target>Vista</target>
+      </trans-unit>
+      <trans-unit id="RkxP.QG" resname="Edit">
+        <source>Edit</source>
+        <target>Editar</target>
+      </trans-unit>
+      <trans-unit id="8HYsTzv" resname="Are you sure?">
+        <source>Are you sure?</source>
+        <target>Estás seguro?</target>
+      </trans-unit>
+      <trans-unit id="4tClSWj" resname="Delete">
+        <source>Delete</source>
+        <target>Eliminar</target>
+      </trans-unit>
+      <trans-unit id="E6.FYCy" resname="New Rute">
+        <source>New Rute</source>
+        <target>Nueva Ruta</target>
+      </trans-unit>
+      <trans-unit id="weLZkHg" resname="Create new Rute">
+        <source>Create new Rute</source>
+        <target>Crear nueva Ruta</target>
+      </trans-unit>
+      <trans-unit id="CO5SrhJ" resname="Walk">
+        <source>Walk</source>
+        <target>Ruta</target>
+      </trans-unit>
+      <trans-unit id="EhVukhv" resname="Id">
+        <source>Id</source>
+        <target>Id</target>
+      </trans-unit>
+      <trans-unit id="fozSBW2" resname="Title">
+        <source>Title</source>
+        <target>Titulo</target>
+      </trans-unit>
+      <trans-unit id="Ntdf8OS" resname="WalkDate">
+        <source>WalkDate</source>
+        <target>Fecha de la ruta</target>
+      </trans-unit>
+      <trans-unit id="9szZbQ1" resname="Select images:">
+        <source>Select images:</source>
+        <target>Seleccionar imágenes:</target>
+      </trans-unit>
+      <trans-unit id="wcEAnT8" resname="Update">
+        <source>Update</source>
+        <target>Actualizar</target>
+      </trans-unit>
+      <trans-unit id="ebbF.4f" resname="Back to the list">
+        <source>Back to the list</source>
+        <target>Volver a la lista</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>
