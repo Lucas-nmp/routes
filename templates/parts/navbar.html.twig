@@ -2,6 +2,8 @@
     <nav>
         <a href="{{ path('app_home') }}">{{'Home'|trans}}</a>
         <a href="{{ path('app_login') }}">{{'Login'|trans}}</a>
-        <a href="{{ path('app_walk_index') }}">{{'Routes'|trans}}</a>
+        {% if is_granted('ROLE_ADMIN') %}
+            <a href="{{ path('app_walk_index') }}">{{'Routes'|trans}}</a>
+        {% endif %}
     </nav>
 </header>
