@@ -4,30 +4,37 @@
 
 {% block body %}
     <div class="container">
-        <h1>Route list</h1>
-        <a class="btn btn-success" href="{{ path('app_walk_new') }}"><i class="bi bi-folder-plus"></i></a>
+        <h2>Route list</h2>
+        <a class="btn btn-success" title="{{ 'Add Route'|trans }}" href="{{ path('app_walk_new') }}"><i class="bi bi-folder-plus"></i></a>
         <hr>
-        <!-- Contenedor para la tabla GridJS -->
+        
         <div id="table-gridjs"></div>
     </div>
     
 {% endblock %}
 
 {% block javascripts %}
-    {{ parent() }} <!-- Asegúrate de incluir los scripts de la plantilla base -->
+    {{ parent() }} 
 
     
 
     <script>
         'use strict';
 
-        // Función para inicializar la tabla GridJS
+        
         function initializeGridJS() {
-            // Obtener los datos de las walks desde Twig
-            let walks = {{ walksJson|raw }};
-            console.log("Datos de walks en JS:", walks); // Verificar en consola
+            
+            const container = document.getElementById('table-gridjs');
+            if (!container) {
+                console.log("El contenedor #table-gridjs no está presente en esta página.");
+                return; 
+            }
 
-            // Crear la tabla GridJS
+            
+            let walks = {{ walksJson|raw }};
+            console.log("Datos de walks en JS:", walks); 
+
+            
             new gridjs.Grid({
                 columns: [
                     '{{ "Name"|trans }}',
@@ -59,13 +66,13 @@
                         </form>
                     `)
                 ])
-            }).render(document.getElementById("table-gridjs"));
+            }).render(container); 
         }
 
-        // Inicializar la tabla cuando la página se carga por primera vez
+        
         document.addEventListener('DOMContentLoaded', initializeGridJS);
 
-        // Re-inicializar la tabla cada vez que Turbo cargue nuevo contenido
+        
         document.addEventListener('turbo:load', initializeGridJS);
     </script>
 {% endblock %}
