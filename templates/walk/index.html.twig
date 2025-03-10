@@ -1,47 +1,72 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Walk index{% endblock %}
+{% block title %}Route list{% endblock %}
 
 {% block body %}
-    <h1>Walk index</h1>
-    <a class="btn btn-success" href="{{ path('app_walk_new') }}">Create new</a>
-    <hr>
-
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>WalkDate</th>
-                <th>Description</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for walk in walks %}
-            <tr>
-                <td>{{ walk.id }}</td>
-                <td>{{ walk.title }}</td>
-                <td>{{ walk.walkDate ? walk.walkDate|date('Y-m-d') : '' }}</td>
-                <td>{{ walk.description }}</td>
-                <td>
-                    <div class="d-flex gap-2">
-                        <a class="btn btn-success" title="Ver" href="{{ path('app_walk_show', {'id': walk.id}) }}"><i class="bi bi-eye"></i></a>
-                        <a class="btn btn-primary" title="Editar" href="{{ path('app_walk_edit', {'id': walk.id}) }}"><i class="bi bi-pencil-square"></i></a>
-                        <form method="post" action="{{ path('app_walk_delete', {'id': walk.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ walk.id) }}">
-                            <button class="btn btn-danger" title="Eliminar"><i class="bi bi-trash"></i></button>
-                        </form>
-                    </div>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="5">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
+    <div class="container">
+        <h1>Route list</h1>
+        <a class="btn btn-success" href="{{ path('app_walk_new') }}"><i class="bi bi-folder-plus"></i></a>
+        <hr>
+        <!-- Contenedor para la tabla GridJS -->
+        <div id="table-gridjs"></div>
+    </div>
     
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }} <!-- Asegúrate de incluir los scripts de la plantilla base -->
+
+    
+
+    <script>
+        'use strict';
+
+        // Función para inicializar la tabla GridJS
+        function initializeGridJS() {
+            // Obtener los datos de las walks desde Twig
+            let walks = {{ walksJson|raw }};
+            console.log("Datos de walks en JS:", walks); // Verificar en consola
+
+            // Crear la tabla GridJS
+            new gridjs.Grid({
+                columns: [
+                    '{{ "Name"|trans }}',
+                    '{{ "Date"|trans }}',
+                    '{{ "Description"|trans }}',
+                    '{{ "Actions"|trans }}'
+                ],
+                pagination: {
+                    limit: 5
+                },
+                sort: true,
+                search: true,
+                data: walks.map(walk => [
+                    walk.name,
+                    walk.dateWalk,
+                    walk.description,
+                    gridjs.html(`
+                        <a class="btn btn-success" href="/walk/${walk.id}" title="{{ 'View'|trans }}">
+                            <i class="bi bi-eye"></i>
+                        </a>
+                        <a class="btn btn-primary" href="/walk/${walk.id}/edit" title="{{ 'Edit'|trans }}">
+                            <i class="bi bi-pencil-square"></i>
+                        </a>
+                        <form method="post" action="/walk/${walk.id}" onsubmit="return confirm('{{ 'Are you sure?'|trans }}');" style="display:inline;">
+                            <input type="hidden" name="_token" value="${walk.csrf_token}">
+                            <button type="submit" class="btn btn-danger" title="{{ 'Delete'|trans }}">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </form>
+                    `)
+                ])
+            }).render(document.getElementById("table-gridjs"));
+        }
+
+        // Inicializar la tabla cuando la página se carga por primera vez
+        document.addEventListener('DOMContentLoaded', initializeGridJS);
+
+        // Re-inicializar la tabla cada vez que Turbo cargue nuevo contenido
+        document.addEventListener('turbo:load', initializeGridJS);
+    </script>
+{% endblock %}
+

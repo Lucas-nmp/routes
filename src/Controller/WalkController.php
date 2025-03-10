@@ -17,8 +17,22 @@ final class WalkController extends AbstractController
     #[Route(name: 'app_walk_index', methods: ['GET'])]
     public function index(WalkRepository $walkRepository): Response
     {
+
+        $walks = $walkRepository->findAll();
+
+        $walksArray = array_map(function($walk) {
+            return [
+                'id' => $walk->getId(),
+                'name' => $walk->getTitle(),
+                'dateWalk' => $walk->getWalkDate() ? $walk->getWalkDate()->format('Y-m-d') : '',
+                'description' => $walk->getDescription(),
+                'csrf_token' => $this->container->get('security.csrf.token_manager')->getToken('delete' . $walk->getId())->getValue(),
+            ];
+        }, $walks);
+
         return $this->render('walk/index.html.twig', [
-            'walks' => $walkRepository->findAll(),
+            'walks' => $walks,
+            'walksJson' => json_encode($walksArray),
         ]);
     }
 
