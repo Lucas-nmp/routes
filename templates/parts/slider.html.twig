@@ -40,3 +40,14 @@
 
 
 </div>
+
+{% block javascripts %}
+     
+    <script>
+        'use strict';
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+        });
+    </script>
+
+{% endblock %}
